@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  trend3:
+    build: .
+    volumes:
+      - /var/www/html/trendsutra:/var/www/html/
+
+  webserver:
+    image: nginx
+    volumes:
+      - /var/www/html/trendsutra:/var/www/html/
+      - ./trend3.conf:/etc/nginx/conf.d/trend3.conf
+      - ./ssl/nginx.crt:/etc/nginx/ssl/nginx.crt
+      - ./ssl/nginx.key:/etc/nginx/ssl/nginx.key
+    ports:
+      - '80:80'
+      - '443:443'
